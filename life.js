@@ -8,8 +8,13 @@ function cellIsAlive(targetCell, cells) {
 
 export function next(cells) {
     const cell = [0, 0];
-    const potentialNeighbours = [[1, 0], [-1, 0]];
-    const condition = potentialNeighbours.every((potentialNeighbour) => cellIsAlive(potentialNeighbour, cells));
+    const potentialNeighbours = [
+        [1, 0],
+        [-1, 0],
+    ];
+    const condition = potentialNeighbours.every((potentialNeighbour) =>
+        cellIsAlive(potentialNeighbour, cells),
+    );
 
-    return (condition) ? cells : [];
+    return condition ? cells : [];
 }
