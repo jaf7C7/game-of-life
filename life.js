@@ -1,3 +1,3 @@
-export function next() {
-    return (cells.length === 3) ? [[0, 0]] : [];
+export function next(cells) {
+    return (cells.length === 3) ? cells : [];
 }
