@@ -15,7 +15,8 @@
   "scripts": {
     "preinstall": "git config core.hooksPath .githooks",
     "test": "jest",
-    "format": "prettier --tab-width 4 --single-quote '*.js'"
+    "format": "prettier --tab-width 4 --single-quote '*.js'",
+    "lint": "eslint"
   },
   "author": "",
   "license": "ISC",
