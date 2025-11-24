@@ -43,6 +43,16 @@ function getNeighbours(targetCell) {
 }
 
 /**
+ * Removes `targetCell` from `cells` and returns the new state of `cells`.
+ * @param {Cell} targetCell
+ * @param {Array<Cell>} cells
+ * @returns {Array<Cell>}
+ */
+function killCell(targetCell, cells) {
+    return cells.filter((cell) => !cellsAreEqual(cell, targetCell));
+}
+
+/**
  * Calculates the next state of a given set of cells according to the
  * rules of the game and returns that new state.
  * @param {Array<Cell>} cells
@@ -57,8 +67,7 @@ export function next(cells) {
     let newCells = [...cells];
 
     if (liveNeighbours.length !== 2) {
-        // Remove the target cell from cells (the cell dies).
-        newCells = newCells.filter((cell) => !cellsAreEqual(cell, [0, 0]));
+        newCells = killCell([0, 0], newCells);
     }
 
     return newCells;
