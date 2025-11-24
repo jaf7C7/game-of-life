@@ -67,7 +67,7 @@ export function next(cells) {
         });
 
         if (liveNeighbours.length !== 2) {
-            newCells = killCell(cell, newCells);
+            newCells = killCell(cell, cells);
         }
     }
 
