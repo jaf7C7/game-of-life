@@ -61,14 +61,14 @@ function killCell(targetCell, cells) {
 export function next(cells) {
     let newCells = [...cells];
 
-    const targetCell = [0, 0];
-    const neighbours = getNeighbours(targetCell);
-    const liveNeighbours = neighbours.filter((neighbour) =>
-        cellIsAlive(neighbour, cells),
-    );
+    for (let cell of cells) {
+        const liveNeighbours = getNeighbours(cell).filter((neighbour) => {
+            return cellIsAlive(neighbour, cells);
+        });
 
-    if (liveNeighbours.length !== 2) {
-        newCells = killCell(targetCell, newCells);
+        if (liveNeighbours.length !== 2) {
+            newCells = killCell(cell, newCells);
+        }
     }
 
     return newCells;
