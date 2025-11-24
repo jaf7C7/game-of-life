@@ -66,3 +66,15 @@ test('a dead cell with exactly three live neighbours becomes alive', () => {
 
     expect(next(cells)).toContainEqual(soonToBeAliveCell);
 });
+
+test('a dead cell with exactly three live neighbours becomes alive (redux)', () => {
+    const soonToBeAliveCell = [1, 1];
+    const neighbours = [
+        [1, 0],
+        [0, 0],
+        [0, 1],
+    ];
+    const cells = [...neighbours];
+
+    expect(next(cells)).toContainEqual(soonToBeAliveCell);
+});
