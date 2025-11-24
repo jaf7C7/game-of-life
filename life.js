@@ -54,5 +54,12 @@ export function next(cells) {
         cellIsAlive(neighbour, cells),
     );
 
-    return liveNeighbours.length == 2 ? cells : [];
+    let newCells = [...cells];
+
+    if (liveNeighbours.length !== 2) {
+        // Remove the target cell from cells (the cell dies).
+        newCells = newCells.filter((cell) => !cellsAreEqual(cell, [0, 0]));
+    }
+
+    return newCells;
 }
