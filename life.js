@@ -1,6 +1,15 @@
 /** @type {Array<number>} Cell */
 
 /**
+ * Removes duplicate elements from an array, returning a new array.
+ * @param {Array} array
+ * @returns {Array}
+ */
+function uniquify(array) {
+    return Array.from(new Set(array));
+}
+
+/**
  * Returns `true` if `cellA` and `cellB` are the same, else `false`.
  * @param {Cell} cellA
  * @param {Cell} cellB
@@ -78,12 +87,14 @@ export function next(cells) {
         potentialResurrectees.push(...deadNeighbours);
     }
 
-    const occurrences = potentialResurrectees.filter((e) =>
-        cellsAreEqual(e, [0, 0]),
-    );
+    for (const cell of uniquify(potentialResurrectees)) {
+        const occurrences = potentialResurrectees.filter((e) => {
+            return cellsAreEqual(e, cell);
+        });
 
-    if (occurrences.length === 3) {
-        newCells.push([0, 0]);
+        if (occurrences.length === 3) {
+            newCells.push(cell);
+        }
     }
 
     return newCells;
