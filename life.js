@@ -59,15 +59,16 @@ function killCell(targetCell, cells) {
  * @returns {Array<Cell>}
  */
 export function next(cells) {
-    const neighbours = getNeighbours([0, 0]);
+    let newCells = [...cells];
+
+    const targetCell = [0, 0];
+    const neighbours = getNeighbours(targetCell);
     const liveNeighbours = neighbours.filter((neighbour) =>
         cellIsAlive(neighbour, cells),
     );
 
-    let newCells = [...cells];
-
     if (liveNeighbours.length !== 2) {
-        newCells = killCell([0, 0], newCells);
+        newCells = killCell(targetCell, newCells);
     }
 
     return newCells;
