@@ -1,4 +1,4 @@
-/** @type {Array<number>} Cell */
+/** @type {Array.<number>} Cell */
 
 /**
  * Removes duplicate elements from an array, returning a new array.
@@ -22,7 +22,7 @@ function cellsAreEqual(cellA, cellB) {
 /**
  * Returns `true` if `targetCell` appears in `cells`, else `false`.
  * @param {Cell} targetCell
- * @param {Array<Cell>} cells
+ * @param {Array.<Cell>} cells
  * @returns {boolean}
  */
 function cellIsAlive(targetCell, cells) {
@@ -33,7 +33,7 @@ function cellIsAlive(targetCell, cells) {
  * Returns the array of 8 cells which immediately surround the target
  * cell.
  * @param {Cell} targetCell
- * @returns {Array<Cell>}
+ * @returns {Array.<Cell>}
  */
 function getNeighbours(targetCell) {
     const [x, y] = targetCell;
@@ -54,8 +54,8 @@ function getNeighbours(targetCell) {
 /**
  * Calculates the next state of a given set of cells according to the
  * rules of the game and returns that new state.
- * @param {Array<Cell>} cells
- * @returns {Array<Cell>}
+ * @param {Array.<Cell>} cells
+ * @returns {Array.<Cell>}
  */
 export function next(cells) {
     const newCells = [];
