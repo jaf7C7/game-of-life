@@ -9,7 +9,13 @@ function cellIsAlive(targetCell, cells) {
 export function next(cells) {
     const potentialNeighbours = [
         [1, 0],
+        [1, 1],
+        [0, 1],
+        [1, -1],
         [-1, 0],
+        [-1, -1],
+        [0, -1],
+        [1, -1],
     ];
     const liveNeighbours = potentialNeighbours.filter((potentialNeighbour) =>
         cellIsAlive(potentialNeighbour, cells),
