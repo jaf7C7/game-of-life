@@ -58,7 +58,7 @@ function getNeighbours(targetCell) {
  * @returns {Array.<Cell>}
  */
 export function next(cells) {
-    const newCells = [];
+    const nextCells = [];
     const potentialResurrectees = [];
 
     for (const cell of cells) {
@@ -67,7 +67,7 @@ export function next(cells) {
         });
 
         if (liveNeighbours.length === 2 || liveNeighbours.length === 3) {
-            newCells.push(cell);
+            nextCells.push(cell);
         }
 
         const deadNeighbours = getNeighbours(cell).filter((neighbour) => {
@@ -83,9 +83,9 @@ export function next(cells) {
         });
 
         if (occurrences.length === 3) {
-            newCells.push(cell);
+            nextCells.push(cell);
         }
     }
 
-    return newCells;
+    return nextCells;
 }
