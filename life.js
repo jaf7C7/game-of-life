@@ -52,6 +52,25 @@ function getNeighbours(targetCell) {
 }
 
 /**
+ * Checks immediate neighbours of a cell and returns an array of live and dead
+ * neighbours.
+ * @param {Cell} cell
+ * @param {Array.<Cell>} cells
+ * @returns {Array.<Array.<Cell>>}
+ */
+function analyseNeighbours(cell, cells) {
+    const liveNeighbours = getNeighbours(cell).filter((neighbour) => {
+        return cellIsAlive(neighbour, cells);
+    });
+
+    const deadNeighbours = getNeighbours(cell).filter((neighbour) => {
+        return !cellIsAlive(neighbour, cells);
+    });
+
+    return [liveNeighbours, deadNeighbours];
+}
+
+/**
  * Calculates the next state of a given set of cells according to the
  * rules of the game and returns that new state.
  * @param {Array.<Cell>} cells
@@ -62,17 +81,11 @@ export function next(cells) {
     const potentialResurrectees = [];
 
     for (const cell of cells) {
-        const liveNeighbours = getNeighbours(cell).filter((neighbour) => {
-            return cellIsAlive(neighbour, cells);
-        });
+        const [liveNeighbours, deadNeighbours] = analyseNeighbours(cell, cells);
 
         if (liveNeighbours.length === 2 || liveNeighbours.length === 3) {
             nextCells.push(cell);
         }
-
-        const deadNeighbours = getNeighbours(cell).filter((neighbour) => {
-            return !cellIsAlive(neighbour, cells);
-        });
 
         potentialResurrectees.push(...deadNeighbours);
     }
