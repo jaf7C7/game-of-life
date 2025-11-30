@@ -57,13 +57,16 @@ function getNeighbours(targetCell) {
  * @returns {Array.<Array.<Cell>>}
  */
 function analyseNeighbours(cell, cells) {
-    const liveNeighbours = getNeighbours(cell).filter((neighbour) => {
-        return cellIsAlive(neighbour, cells);
-    });
+    const liveNeighbours = [];
+    const deadNeighbours = [];
 
-    const deadNeighbours = getNeighbours(cell).filter((neighbour) => {
-        return !cellIsAlive(neighbour, cells);
-    });
+    for (const neighbour of getNeighbours(cell)) {
+        if (cellIsAlive(neighbour, cells)) {
+            liveNeighbours.push(neighbour);
+        } else {
+            deadNeighbours.push(neighbour);
+        }
+    }
 
     return [liveNeighbours, deadNeighbours];
 }
