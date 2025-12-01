@@ -14,3 +14,12 @@ test('can toggle a dead cell to alive', () => {
 
     expect(grid.cells).toContainEqual([5, 5]);
 });
+
+test('can toggle an alive cell to dead', () => {
+    const grid = createGrid();
+
+    grid.toggleCell(5, 5);
+    grid.toggleCell(5, 5);
+
+    expect(grid.cells).not.toContainEqual([5, 5]);
+});
