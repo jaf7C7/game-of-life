@@ -24,13 +24,13 @@ test('can toggle an alive cell to dead', () => {
     expect(grid.cells).not.toContainEqual([5, 5]);
 });
 
-test('game starts in stopped state', () => {
+test('the game is initially in stopped state', () => {
     const game = createGame();
 
     expect(game.isPlaying()).toBe(false);
 });
 
-test('can start the game', () => {
+test('the game loop can be started', () => {
     const game = createGame();
 
     game.play();
@@ -38,7 +38,7 @@ test('can start the game', () => {
     expect(game.isPlaying()).toBe(true);
 });
 
-test('can stop the playing game', () => {
+test('the game loop can be stopped', () => {
     const game = createGame();
 
     game.play();
@@ -47,7 +47,7 @@ test('can stop the playing game', () => {
     expect(game.isPlaying()).toBe(false);
 });
 
-test('calculates new state of the game with each tick', () => {
+test('the game calculates new state of the grid with each tick', () => {
     const grid = createGrid();
     // A lone cell without neighbours will die after 1 generation.
     grid.toggleCell(5, 5);
