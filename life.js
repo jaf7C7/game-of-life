@@ -15,7 +15,7 @@ function uniquify(array) {
  * @param {Cell} cellB
  * @returns {boolean}
  */
-function cellsAreEqual(cellA, cellB) {
+export function cellsAreEqual(cellA, cellB) {
     return cellA[0] === cellB[0] && cellA[1] === cellB[1];
 }
 

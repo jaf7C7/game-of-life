@@ -1,9 +1,12 @@
+import { cellsAreEqual } from './life.js';
+
 export function createGrid() {
     return {
         cells: [],
         toggleCell(x, y) {
-            const cellIndex = this.cells.findIndex(
-                (cell) => cell[0] === x && cell[1] === y,
+            const targetCell = [x, y];
+            const cellIndex = this.cells.findIndex((cell) =>
+                cellsAreEqual(cell, targetCell),
             );
 
             if (cellIndex === -1) {
