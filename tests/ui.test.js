@@ -1,5 +1,5 @@
 import { test, expect } from '@jest/globals';
-import { createGrid } from '../ui.js';
+import { createGrid, createGame } from '../ui.js';
 
 test('should create a grid of cells', () => {
     const grid = createGrid();
@@ -22,4 +22,10 @@ test('can toggle an alive cell to dead', () => {
     grid.toggleCell(5, 5);
 
     expect(grid.cells).not.toContainEqual([5, 5]);
+});
+
+test('game starts in stopped state', () => {
+    const game = createGame();
+
+    expect(game.isPlaying()).toBe(false);
 });

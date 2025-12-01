@@ -17,3 +17,11 @@ export function createGrid() {
         },
     };
 }
+
+export function createGame() {
+    return {
+        isPlaying() {
+            return false;
+        },
+    };
+}
