@@ -55,5 +55,5 @@ test('the game calculates new state of the grid with each tick', () => {
 
     game.tick();
 
-    expect(grid.cells).not.toContainEqual([5, 5]);
+    expect(grid.cells).toEqual([]);
 });
