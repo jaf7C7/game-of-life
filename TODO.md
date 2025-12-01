@@ -9,9 +9,9 @@
 
 ## The User Interface
 
-- [ ] grid of empty cells
-- [ ] clicking a dead cell makes it alive
-- [ ] clicking an alive cell makes it dead
-- [ ] play button starts the game
-- [ ] stop button stops the game
-- [ ] game stops when all cells are dead
+- [x] grid of empty cells
+- [x] clicking a dead cell makes it alive
+- [x] clicking an alive cell makes it dead
+- [x] play button starts the game
+- [x] stop button stops the game
+- [x] game stops when all cells are dead
