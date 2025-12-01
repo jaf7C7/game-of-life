@@ -78,3 +78,17 @@ test('a dead cell with exactly three live neighbours becomes alive (redux)', () 
 
     expect(next(cells)).toContainEqual(soonToBeAliveCell);
 });
+
+test('the blinker oscillator', () => {
+    // A blinker is the simplest form of oscillator in `life`. It oscillates
+    // infinitely between a row of three cells and a column of three cells.
+    // See: https://conways-game-of-life.fandom.com/wiki/Blinker
+    const blinker = [
+        [-1, 0],
+        [0, 0],
+        [1, 0],
+    ];
+    const cells = [...blinker];
+
+    expect(next(next(cells)).sort()).toEqual(blinker);
+});

@@ -1,12 +1,20 @@
 /** @type {Array.<number>} Cell */
 
 /**
- * Removes duplicate elements from an array, returning a new array.
- * @param {Array} array
- * @returns {Array}
+ * Removes duplicates from an array of cells, returning a new array.
+ * @param {Array.<Cell>} cells
+ * @returns {Array.<Cell>}
  */
-function uniquify(array) {
-    return Array.from(new Set(array));
+function uniquify(cells) {
+    const uniqueCells = [];
+
+    for (const cell of cells) {
+        if (uniqueCells.find((c) => cellsAreEqual(cell, c)) === undefined) {
+            uniqueCells.push(cell);
+        }
+    }
+
+    return uniqueCells;
 }
 
 /**
