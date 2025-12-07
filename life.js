@@ -1,4 +1,5 @@
 /** @type {Array.<number>} Cell */
+/** @type {Life} Life */
 
 /**
  * Removes duplicates from an array of cells, returning a new array.
@@ -112,28 +113,54 @@ export function next(cells) {
     return result;
 }
 
+/**
+ * Class representing the state of the game.
+ */
 export class Life {
+    /**
+     * Create a new instance of `Life`.
+     * @returns {Life}
+     */
     constructor() {
         this.cells = [];
         this._playing = false;
     }
 
+    /**
+     * Changes the state of the game to playing.
+     */
     play() {
         this._playing = true;
     }
 
+    /**
+     * Changes the state of the game to not playing.
+     */
     stop() {
         this._playing = false;
     }
 
+    /**
+     * Returns `true` if the game is currently playing, else `false`.
+     * @returns {boolean}
+     */
     isPlaying() {
         return this._playing;
     }
 
+    /**
+     * Calculates the new state of the game after a single time increment and
+     * updates the current state.
+     */
     tick() {
         this.cells = next(this.cells);
     }
 
+    /**
+     * Toggles a single cell to life, if it's dead, or to death, if it's alive.
+     * @param {number} x
+     * @param {number} y
+     */
     toggleCell(x, y) {
         const targetCell = [x, y];
         const cellIndex = this.cells.findIndex((cell) =>
