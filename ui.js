@@ -1,6 +1,6 @@
 import { equals, next } from './life.js';
 
-export class Game {
+export class Life {
     constructor() {
         this.cells = [];
         this._playing = false;
