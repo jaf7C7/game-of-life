@@ -4,7 +4,12 @@ cd ~/Projects/life
 
 PS1='\[\e[1;34m\]life\[\e[m\]\$ '
 
-export VIMINIT="${VIMINIT:+${VIMINIT} | }set expandtab shiftwidth=4 autoread formatprg=fmt\ -p'//\ '"
+export VIMINIT="$VIMINIT"'
+set expandtab
+set shiftwidth=4
+set autoread
+set formatprg=fmt\ -p//\\ 
+'
 export CMT='//'
 
 alias t='npm run test'
