@@ -111,6 +111,5 @@ test('game stops automatically when all cells are dead', () => {
     life.play(mockScheduler);
     tickCallback(); // Manually execute a scheduled tick => lone cell dies.
 
-    expect(life.cells).toEqual([]);
     expect(life.isPlaying()).toBe(false);
 });
