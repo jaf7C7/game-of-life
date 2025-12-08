@@ -50,7 +50,7 @@ test('the game loop can be stopped', () => {
     const life = new Life();
     let loopCancelled = false;
 
-    const mockGameLoopScheduler = () => {
+    const mockScheduler = () => {
         return {
             cancel: () => {
                 loopCancelled = true;
@@ -58,7 +58,7 @@ test('the game loop can be stopped', () => {
         };
     };
 
-    life.play(mockGameLoopScheduler);
+    life.play(mockScheduler);
     life.stop();
 
     expect(life.isPlaying()).toBe(false);
