@@ -21,7 +21,7 @@ test('can toggle an alive cell to dead', () => {
     life.toggleCell(5, 5);
     life.toggleCell(5, 5);
 
-    expect(life.cells).not.toContainEqual([5, 5]);
+    expect(life.cells).toEqual([]);
 });
 
 test('calculates new state of the grid with each tick', () => {
@@ -42,6 +42,17 @@ test('starts in a stopped state', () => {
 
 test('can be started playing', () => {
     const life = new Life();
+
+    // An injectable scheduling function is used to avoid having to deal with
+    // `setInterval` in tests - we can just inject a useful mock instead of
+    // messing around with async tests.
+    //
+    // The scheduler accepts a callback function to be executed, in production
+    // this will be the callback passed to `setInterval`.
+    //
+    // The scheduler returns an object with a `cancel()` method, which is used
+    // by the `life` class to cancel the repeated execution of the task. In
+    // production this will be a thin wrapper around `clearInterval`.
     const mockScheduler = () => {};
 
     life.play(mockScheduler);
@@ -57,7 +68,7 @@ test('schedules game ticks while playing', () => {
         tickCallback = callback;
     };
 
-    life.toggleCell(0, 0); // Lone cell will die.
+    life.toggleCell(0, 0); // Lone cell will die after 1 tick.
     life.play(mockScheduler);
     tickCallback(); // Manually execute a scheduled tick.
 
@@ -66,12 +77,12 @@ test('schedules game ticks while playing', () => {
 
 test('cancels scheduled ticks when stopped', () => {
     const life = new Life();
-    let tickCallback = null;
+    let ticksCancelled = false;
 
     const mockScheduler = () => {
         return {
             cancel: () => {
-                tickCallback = null;
+                ticksCancelled = true;
             },
         };
     };
@@ -79,7 +90,7 @@ test('cancels scheduled ticks when stopped', () => {
     life.play(mockScheduler);
     life.stop();
 
-    expect(tickCallback).toBe(null);
+    expect(ticksCancelled).toBe(true);
 });
 
 // This guards against stray ticks which might get executed after the game has
@@ -95,12 +106,12 @@ test('ticks executed when stopped have no effect', () => {
         };
     };
 
-    life.toggleCell(0, 0); // Lone cell will die.
+    life.toggleCell(0, 0); // Lone cell will die after 1 tick.
     life.play(mockScheduler);
     life.stop();
     tickCallback(); // Tick should have no effect on stopped game.
 
-    expect(life.cells).toEqual([[0, 0]]);
+    expect(life.cells).toEqual([[0, 0]]); // Cell still alive.
 });
 
 test('stops playing automatically when all cells are dead', () => {
@@ -116,7 +127,7 @@ test('stops playing automatically when all cells are dead', () => {
         };
     };
 
-    life.toggleCell(5, 5); // Lone cell will die
+    life.toggleCell(5, 5); // Lone cell will die after 1 tick.
     life.play(mockScheduler);
     tickCallback(); // Manually execute a scheduled tick => lone cell dies.
 
