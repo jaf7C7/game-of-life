@@ -8,7 +8,7 @@ export VIMINIT="$VIMINIT"'
 set expandtab
 set shiftwidth=4
 set autoread
-set formatprg=fmt\ -p//\\ 
+set formatprg=fmt\ -p//\\\ 
 '
 export CMT='//'
 
