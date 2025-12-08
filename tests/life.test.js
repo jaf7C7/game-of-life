@@ -32,10 +32,16 @@ test('the game is initially in stopped state', () => {
 
 test('the game loop can be started', () => {
     const life = new Life();
+    let gameLoop = null;
 
-    life.play();
+    const mockGameLoopScheduler = (callback) => {
+        gameLoop = callback;
+    };
+
+    life.play(mockGameLoopScheduler);
 
     expect(life.isPlaying()).toBe(true);
+    expect(gameLoop).not.toBe(null);
 });
 
 test('the game loop can be stopped', () => {

@@ -129,8 +129,11 @@ export class Life {
     /**
      * Changes the state of the game to playing.
      */
-    play() {
+    play(scheduler) {
         this._playing = true;
+        if (scheduler) {
+            scheduler();
+        }
     }
 
     /**
