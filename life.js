@@ -146,7 +146,7 @@ export class Life {
     play(scheduler) {
         if (scheduler) {
             this._gameLoop = scheduler(() => {
-                if (!this._stopped) {
+                if (this.isPlaying()) {
                     this.tick();
                 }
             });
@@ -159,9 +159,9 @@ export class Life {
      * @returns {void}
      */
     stop() {
-        this._stopped = true;
         if (this._gameLoop) {
             this._gameLoop.cancel();
+            this._gameLoop = null;
         }
     }
 
