@@ -146,6 +146,9 @@ export class Life {
         this._gameLoop = scheduler(() => {
             if (this.isPlaying()) {
                 this.tick();
+                if (this.cells.length === 0) {
+                    this.stop();
+                }
             }
         });
     }
@@ -173,9 +176,6 @@ export class Life {
      */
     tick() {
         this.cells = next(this.cells);
-        if (this.cells.length === 0) {
-            this.stop();
-        }
     }
 
     /**
