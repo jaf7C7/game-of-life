@@ -144,13 +144,11 @@ export class Life {
      * @returns {void}
      */
     play(scheduler) {
-        if (scheduler) {
-            this._gameLoop = scheduler(() => {
-                if (this.isPlaying()) {
-                    this.tick();
-                }
-            });
-        }
+        this._gameLoop = scheduler(() => {
+            if (this.isPlaying()) {
+                this.tick();
+            }
+        });
     }
 
     /**

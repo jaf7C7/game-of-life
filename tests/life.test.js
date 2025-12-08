@@ -40,6 +40,15 @@ test('starts in a stopped state', () => {
     expect(life.isPlaying()).toBe(false);
 });
 
+test('can be started playing', () => {
+    const life = new Life();
+    const mockScheduler = () => {};
+
+    life.play(mockScheduler);
+
+    expect(life.isPlaying()).toBe(true);
+});
+
 test('schedules game ticks while playing', () => {
     const life = new Life();
     let tickCallback = null;
