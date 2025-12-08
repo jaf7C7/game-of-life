@@ -25,8 +25,8 @@ test('can toggle an alive cell to dead', () => {
 });
 
 test('the game calculates new state of the grid with each tick', () => {
-    // A lone cell without neighbours will die after 1 generation.
     const life = new Life();
+    // A lone cell without neighbours will die after 1 generation.
     life.toggleCell(5, 5);
 
     life.tick();
@@ -44,14 +44,14 @@ test('the game loop schedules game ticks', () => {
 
     life.toggleCell(0, 0); // Lone cell will die.
     life.play(mockScheduler);
-    tickCallback(); // Manually execute a game loop.
+    tickCallback(); // Manually execute a scheduled tick.
 
-    expect(life.cells).toEqual([]);
+    expect(life.cells).toEqual([]); // Cell has died.
 });
 
 test('the game loop can be stopped', () => {
     const life = new Life();
-    let tickCallback = () => undefined;
+    let tickCallback = () => undefined; // Placeholder callback.
 
     const mockScheduler = () => {
         return {
@@ -64,7 +64,7 @@ test('the game loop can be stopped', () => {
     life.play(mockScheduler);
     life.stop();
 
-    expect(tickCallback).toBe(null);
+    expect(tickCallback).toBe(null); // No ticks scheduled => game stopped.
 });
 
 test('game stops automatically when all cells are dead', () => {
@@ -82,7 +82,7 @@ test('game stops automatically when all cells are dead', () => {
 
     life.toggleCell(5, 5); // Lone cell will die
     life.play(mockScheduler);
-    life.tick();
+    tickCallback(); // Manually execute a scheduled tick => lone cell dies.
 
-    expect(tickCallback).toBe(null);
+    expect(tickCallback).toBe(null); // No ticks scheduled => game stopped.
 });
