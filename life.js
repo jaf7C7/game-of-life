@@ -54,11 +54,11 @@ function contains(targetCell, cells) {
 /**
  * Returns the array of 8 cells which immediately surround the target cell.
  *
- * @param {Cell} targetCell
+ * @param {Cell} cell
  * @returns {Cell[]}
  */
-function neighbours(targetCell) {
-    const [x, y] = targetCell;
+function neighbours(cell) {
+    const [x, y] = cell;
     return [
         [x + 1, y],
         [x + 1, y + 1],
@@ -72,18 +72,18 @@ function neighbours(targetCell) {
 }
 
 /**
- * Checks immediate neighbours of a cell and returns an array of live and dead
- * neighbours.
+ * Checks immediate neighbours of a cell and returns a tuple containing arrays
+ * of all live and dead neighbours.
  *
- * @param {Cell} cell
+ * @param {Cell} targetCell
  * @param {Cell[]} cells
  * @returns {Cell[][]}
  */
-function analyseNeighbours(cell, cells) {
+function analyseNeighbours(targetCell, cells) {
     const liveNeighbours = [];
     const deadNeighbours = [];
 
-    for (const neighbour of neighbours(cell)) {
+    for (const neighbour of neighbours(targetCell)) {
         if (contains(neighbour, cells)) {
             liveNeighbours.push(neighbour);
         } else {
@@ -137,8 +137,11 @@ export class Life {
     }
 
     /**
-     * Changes the state of the game to playing and starts the game loop by
-     * calling the `scheduler` function.
+     * Starts the game loop by calling the `scheduler` function to execute
+     * ticks. Stops the game if there are no more living cells.
+     *
+     * See the comments in `tests/life.test.js` for a more detailed explanation
+     * of the scheduler pattern.
      *
      * @param {SchedulerFunction} scheduler
      */
@@ -153,7 +156,7 @@ export class Life {
         });
     }
 
-    /** Changes the state of the game to not playing. */
+    /** Stops the game loop from executing ticks. */
     stop() {
         if (this._gameLoop) {
             this._gameLoop.cancel();
@@ -162,7 +165,7 @@ export class Life {
     }
 
     /**
-     * Returns `true` if there are scheduled ticks, else `false`.
+     * Returns `true` if the game loop is executing ticks, else `false`.
      *
      * @returns {boolean}
      */
