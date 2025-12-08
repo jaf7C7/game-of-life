@@ -148,9 +148,7 @@ export class Life {
         this._playing = true;
         if (scheduler) {
             this._gameLoop = scheduler(() => {
-                if (this._playing) {
-                    this.tick();
-                }
+                this.tick();
             });
         }
     }

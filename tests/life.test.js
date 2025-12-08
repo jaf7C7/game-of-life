@@ -38,11 +38,24 @@ test('the game loop can be started', () => {
         tickCallback = callback;
     };
 
-    life.toggleCell(0, 0); // Lone cell will die.
     life.play(mockScheduler);
-    tickCallback(); // Manually simulate a game tick.
 
     expect(life.isPlaying()).toBe(true);
+    expect(tickCallback).not.toBe(null);
+});
+
+test('the game loop executes game ticks', () => {
+    const life = new Life();
+    let tickCallback = null;
+
+    const mockScheduler = (callback) => {
+        tickCallback = callback;
+    };
+
+    life.toggleCell(0, 0); // Lone cell will die.
+    life.play(mockScheduler);
+    tickCallback(); // Manually execute a game loop.
+
     expect(life.cells).toEqual([]);
 });
 
