@@ -30,14 +30,14 @@ function uniquify(cells) {
 }
 
 /**
- * Returns `true` if `cellA` and `cellB` are the same, else `false`.
+ * Returns `true` if `cell` and `otherCell` are the same, else `false`.
  *
- * @param {Cell} cellA
- * @param {Cell} cellB
+ * @param {Cell} cell
+ * @param {Cell} otherCell
  * @returns {boolean}
  */
-function equals(cellA, cellB) {
-    return cellA[0] === cellB[0] && cellA[1] === cellB[1];
+function equals(cell, otherCell) {
+    return cell[0] === otherCell[0] && cell[1] === otherCell[1];
 }
 
 /**
