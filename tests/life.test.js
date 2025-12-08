@@ -57,12 +57,12 @@ test('the game loop schedules game ticks', () => {
 
 test('stopping the game cancels scheduled ticks', () => {
     const life = new Life();
-    let tickCancelled = false;
+    let tickCallback = null;
 
     const mockScheduler = () => {
         return {
             cancel: () => {
-                tickCancelled = true;
+                tickCallback = null;
             },
         };
     };
@@ -70,7 +70,7 @@ test('stopping the game cancels scheduled ticks', () => {
     life.play(mockScheduler);
     life.stop();
 
-    expect(tickCancelled).toBe(true);
+    expect(tickCallback).toBe(null);
 });
 
 // Make sure any ticks which do get executed after the game has stopped, e.g.
