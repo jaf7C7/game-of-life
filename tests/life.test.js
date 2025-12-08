@@ -34,6 +34,12 @@ test('the game calculates new state of the grid with each tick', () => {
     expect(life.cells).toEqual([]);
 });
 
+test('the game starts in a stopped state', () => {
+    const life = new Life();
+
+    expect(life.isPlaying()).toBe(false);
+});
+
 test('the game loop schedules game ticks', () => {
     const life = new Life();
     let tickCallback = null;

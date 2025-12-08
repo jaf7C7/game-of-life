@@ -163,6 +163,15 @@ export class Life {
     }
 
     /**
+     * Returns `true` if there are scheduled ticks, else `false`.
+     *
+     * @returns {boolean}
+     */
+    isPlaying() {
+        return this._gameLoop !== null;
+    }
+
+    /**
      * Calculates the new state of the game after a single time increment and
      * updates the current state.
      *
