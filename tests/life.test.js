@@ -24,7 +24,7 @@ test('can toggle an alive cell to dead', () => {
     expect(life.cells).not.toContainEqual([5, 5]);
 });
 
-test('the game calculates new state of the grid with each tick', () => {
+test('calculates new state of the grid with each tick', () => {
     const life = new Life();
     // A lone cell without neighbours will die after 1 generation.
     life.toggleCell(5, 5);
@@ -34,13 +34,13 @@ test('the game calculates new state of the grid with each tick', () => {
     expect(life.cells).toEqual([]);
 });
 
-test('the game starts in a stopped state', () => {
+test('starts in a stopped state', () => {
     const life = new Life();
 
     expect(life.isPlaying()).toBe(false);
 });
 
-test('the game loop schedules game ticks', () => {
+test('schedules game ticks while playing', () => {
     const life = new Life();
     let tickCallback = null;
 
@@ -55,7 +55,7 @@ test('the game loop schedules game ticks', () => {
     expect(life.cells).toEqual([]); // Cell has died.
 });
 
-test('stopping the game cancels scheduled ticks', () => {
+test('cancels scheduled ticks when stopped', () => {
     const life = new Life();
     let tickCallback = null;
 
@@ -73,9 +73,9 @@ test('stopping the game cancels scheduled ticks', () => {
     expect(tickCallback).toBe(null);
 });
 
-// Make sure any ticks which do get executed after the game has stopped, e.g.
-// due to asynchronous silliness, have no effect.
-test('the game loop does not execute ticks when stopped', () => {
+// This guards against stray ticks which might get executed after the game has
+// been stopped, due to async timing effects.
+test('ticks executed when stopped have no effect', () => {
     const life = new Life();
     let tickCallback = null;
 
@@ -94,7 +94,7 @@ test('the game loop does not execute ticks when stopped', () => {
     expect(life.cells).toEqual([[0, 0]]);
 });
 
-test('game stops automatically when all cells are dead', () => {
+test('stops playing automatically when all cells are dead', () => {
     const life = new Life();
     let tickCallback = null;
 
