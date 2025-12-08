@@ -40,21 +40,7 @@ test('the game calculates new state of the grid with each tick', () => {
     expect(life.cells).toEqual([]);
 });
 
-test('the game loop can be started', () => {
-    const life = new Life();
-    let tickCallback = null;
-
-    const mockScheduler = (callback) => {
-        tickCallback = callback;
-    };
-
-    life.play(mockScheduler);
-
-    expect(life.isPlaying()).toBe(true);
-    expect(tickCallback).not.toBe(null);
-});
-
-test('the game loop executes game ticks', () => {
+test('the game loop schedules game ticks', () => {
     const life = new Life();
     let tickCallback = null;
 
