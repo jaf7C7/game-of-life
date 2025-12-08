@@ -26,7 +26,7 @@ test('can toggle an alive cell to dead', () => {
 
 test('calculates new state of the grid with each tick', () => {
     const life = new Life();
-    // A lone cell without neighbours will die after 1 generation.
+    // A lone cell without neighbours will die after 1 tick.
     life.toggleCell(5, 5);
 
     life.tick();
