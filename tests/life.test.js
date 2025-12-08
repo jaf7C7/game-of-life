@@ -1,7 +1,7 @@
 import { test, expect } from '@jest/globals';
 import { Life } from '../life.js';
 
-test('should create a grid of cells', () => {
+test('should have an array of live cells', () => {
     const life = new Life();
 
     expect(life.cells).toEqual([]);
