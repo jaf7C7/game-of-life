@@ -23,6 +23,6 @@ alias todo='grep -- "- \[ ]" TODO.md'
 watch() {
     set -- $(git ls-files "${@:-*.js}")
     printf '%s\n' "watching files:" "$@"
-    npx onchange "$@" -- npm run test
+    npx onchange --initial --delay 500 "$@" -- npm run test
 }
 
