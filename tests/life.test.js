@@ -66,3 +66,23 @@ test('the game loop can be stopped', () => {
 
     expect(tickCallback).toBe(null);
 });
+
+test('game stops automatically when all cells are dead', () => {
+    const life = new Life();
+    let tickCallback = null;
+
+    const mockScheduler = (callback) => {
+        tickCallback = callback;
+        return {
+            cancel: () => {
+                tickCallback = null;
+            },
+        };
+    };
+
+    life.toggleCell(5, 5); // Lone cell will die
+    life.play(mockScheduler);
+    life.tick();
+
+    expect(tickCallback).toBe(null);
+});

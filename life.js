@@ -170,6 +170,9 @@ export class Life {
      */
     tick() {
         this.cells = next(this.cells);
+        if (this.cells.length === 0) {
+            this.stop();
+        }
     }
 
     /**
