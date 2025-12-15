@@ -1,5 +1,4 @@
 import { test, expect } from '@jest/globals';
-import { Life } from '../life/life.js';
 import createApp from '../life/app.js';
 
 class MockUI {
@@ -19,10 +18,15 @@ class MockUI {
 class MockLife {
     constructor() {
         this.stopCalled = false;
+        this.toggledCells = [];
     }
 
     stop() {
         this.stopCalled = true;
+    }
+
+    toggleCell(x, y) {
+        this.toggledCells.push([x, y]);
     }
 }
 
@@ -35,7 +39,7 @@ test('Renders a grid of cells', () => {
 });
 
 test('Clicking on the grid toggles the corresponding cell', () => {
-    const life = new Life();
+    const life = new MockLife();
     const ui = new MockUI();
     const cellSize = 20; // size in pixels.
 
@@ -44,7 +48,7 @@ test('Clicking on the grid toggles the corresponding cell', () => {
     grid.click(45, 65); // pixel co-ords.
 
     // (45 / 20 = 2.25 -> floor to 2, 65 / 20 = 3.25 -> floor to 3).
-    expect(life.cells).toEqual([[2, 3]]);
+    expect(life.toggledCells).toEqual([[2, 3]]);
 });
 
 test('Renders a stop button', () => {
