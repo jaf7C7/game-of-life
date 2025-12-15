@@ -1,7 +1,5 @@
 . ~/.bashrc
 
-cd ~/Projects/life
-
 PS1='\[\e[1;34m\]life\[\e[m\]\$ '
 
 export VIMINIT="${VIMINIT+$VIMINIT | }set expandtab shiftwidth=4 autoread formatprg=fmt\ -w79\ -p//\\\  equalprg=cmt"
