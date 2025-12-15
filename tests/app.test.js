@@ -3,26 +3,12 @@ import { Life } from '../life/life.js';
 import createApp from '../life/app.js';
 
 class MockUI {
-    constructor(game) {
-        this._game = game;
+    constructor() {
         this._elements = [];
     }
 
     createElement(element) {
         this._elements.push(element);
-    }
-
-    createGrid(cellSize) {
-        this.createElement({
-            id: 'grid',
-            cellSize: cellSize,
-            click: (x, y) => {
-                this._game.toggleCell(
-                    Math.floor(x / cellSize),
-                    Math.floor(y / cellSize),
-                );
-            },
-        });
     }
 
     findElement(id) {
@@ -40,10 +26,10 @@ test('Renders a grid of cells', () => {
 
 test('Clicking on the grid toggles the corresponding cells', () => {
     const life = new Life();
-    const ui = new MockUI(life);
+    const ui = new MockUI();
     const cellSize = 20; // size in pixels.
 
-    createApp(ui, cellSize);
+    createApp(ui, life, cellSize);
     const grid = ui.findElement('grid');
     grid.click(45, 65); // pixel co-ords.
 
