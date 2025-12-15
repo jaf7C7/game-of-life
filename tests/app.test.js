@@ -61,7 +61,7 @@ test('Clicking on the grid toggles the corresponding cell', () => {
 
 test('Renders a stop button', () => {
     const ui = new MockUI();
-    const life = new MockLife();
+    const life = new Life();
     const cellPixelSize = 20;
 
     createApp(ui, life, cellPixelSize);
@@ -71,18 +71,18 @@ test('Renders a stop button', () => {
 
 test('Clicking the stop button stops the game', () => {
     const ui = new MockUI();
-    const life = new MockLife();
+    const life = new Life();
     const cellPixelSize = 20;
 
     createApp(ui, life, cellPixelSize);
     ui.findElement('stop').click();
 
-    expect(life.stopCalled).toBe(true);
+    expect(life.isPlaying()).toBe(false);
 });
 
 test('Renders a start button', () => {
     const ui = new MockUI();
-    const life = new MockLife();
+    const life = new Life();
     const cellPixelSize = 20;
 
     createApp(ui, life, cellPixelSize);
