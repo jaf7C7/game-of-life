@@ -17,8 +17,10 @@ export default function createApp(ui, game, cellSize) {
     ui.createElement({
         id: 'start',
         click() {
-            const task = { cancel: () => undefined };
-            game.play(() => task);
+            // XXX: This will not work in production.
+            const dummyScheduledTask = { cancel: () => undefined };
+            const dummyScheduler = () => dummyScheduledTask;
+            game.play(dummyScheduler);
         },
     });
 }
