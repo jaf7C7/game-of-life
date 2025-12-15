@@ -1,3 +1,3 @@
-export default function createApp(ui) {
-    ui.createGrid();
+export default function createApp(ui, cellSize) {
+    ui.createGrid(cellSize);
 }

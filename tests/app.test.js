@@ -12,11 +12,12 @@ class MockUI {
         this._elements.push(element);
     }
 
-    createGrid() {
+    createGrid(cellSize) {
         this.createElement({
             id: 'grid',
-            click: () => {
-                this._game.toggleCell(2, 2);
+            cellSize: cellSize,
+            click: (x, y) => {
+                this._game.toggleCell(x / cellSize, y / cellSize);
             },
         });
     }
@@ -37,7 +38,7 @@ test('Renders a grid of cells', () => {
 test('Clicking on the grid toggles the corresponding cells', () => {
     const life = new Life();
     const ui = new MockUI(life);
-    const cellSize = 25;
+    const cellSize = 25; // size in pixels.
 
     createApp(ui, cellSize);
     const grid = ui.findElement('grid');
