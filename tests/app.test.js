@@ -1,13 +1,24 @@
 import { test, expect } from '@jest/globals';
+import { Life } from '../life/life.js';
 import createApp from '../life/app.js';
 
 class MockUI {
-    constructor() {
+    constructor(game) {
+        this._game = game;
         this._elements = [];
     }
 
-    createElement(id) {
-        this._elements.push({ id });
+    createElement(element) {
+        this._elements.push(element);
+    }
+
+    createGrid() {
+        this.createElement({
+            id: 'grid',
+            click: () => {
+                this._game.toggleCell(2, 2);
+            },
+        });
     }
 
     findElement(id) {
@@ -21,4 +32,16 @@ test('Renders a grid of cells', () => {
     createApp(ui);
 
     expect(ui.findElement('grid')).not.toBe(undefined);
+});
+
+test('Clicking on the grid toggles the corresponding cells', () => {
+    const life = new Life();
+    const ui = new MockUI(life);
+    const cellSize = 25;
+
+    createApp(ui, cellSize);
+    const grid = ui.findElement('grid');
+    grid.click(50, 50); // pixel co-ords, should toggle cell [2, 2].
+
+    expect(life.cells).toEqual([[2, 2]]);
 });
