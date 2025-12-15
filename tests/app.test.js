@@ -73,3 +73,13 @@ test('Clicking the stop button stops the game', () => {
 
     expect(life.stopCalled).toBe(true);
 });
+
+test('Renders a start button', () => {
+    const ui = new MockUI();
+    const life = new MockLife();
+    const cellPixelSize = 20;
+
+    createApp(ui, life, cellPixelSize);
+
+    expect(ui.findElement('start')).not.toBe(undefined);
+});

@@ -13,4 +13,8 @@ export default function createApp(ui, game, cellSize) {
             game.stop();
         },
     });
+
+    ui.createElement({
+        id: 'start',
+    });
 }
