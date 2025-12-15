@@ -1,5 +1,6 @@
 import { test, expect } from '@jest/globals';
 import createApp from '../life/app.js';
+import { Life } from '../life/life.js';
 
 class MockUI {
     constructor() {
@@ -37,7 +38,7 @@ class MockLife {
 
 test('Renders a grid of cells', () => {
     const ui = new MockUI();
-    const life = new MockLife();
+    const life = new Life();
     const cellPixelSize = 20;
 
     createApp(ui, life, cellPixelSize);
