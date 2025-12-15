@@ -7,5 +7,10 @@ export default function createApp(ui, game, cellSize) {
         },
     });
 
-    ui.createElement({ id: 'stop' });
+    ui.createElement({
+        id: 'stop',
+        click() {
+            game.stop();
+        },
+    });
 }

@@ -16,6 +16,16 @@ class MockUI {
     }
 }
 
+class MockLife {
+    constructor() {
+        this.stopCalled = false;
+    }
+
+    stop() {
+        this.stopCalled = true;
+    }
+}
+
 test('Renders a grid of cells', () => {
     const ui = new MockUI();
 
@@ -43,4 +53,14 @@ test('Renders a stop button', () => {
     createApp(ui);
 
     expect(ui.findElement('stop')).not.toBe(undefined);
+});
+
+test('Clicking the stop button stops the game', () => {
+    const ui = new MockUI();
+    const life = new MockLife();
+
+    createApp(ui, life);
+    ui.findElement('stop').click();
+
+    expect(life.stopCalled).toBe(true);
 });
