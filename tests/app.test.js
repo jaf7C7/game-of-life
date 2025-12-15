@@ -36,3 +36,11 @@ test('Clicking on the grid toggles the corresponding cell', () => {
     // (45 / 20 = 2.25 -> floor to 2, 65 / 20 = 3.25 -> floor to 3).
     expect(life.cells).toEqual([[2, 3]]);
 });
+
+test('Renders a stop button', () => {
+    const ui = new MockUI();
+
+    createApp(ui);
+
+    expect(ui.findElement('stop')).not.toBe(undefined);
+});

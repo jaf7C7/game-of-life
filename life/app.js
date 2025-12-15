@@ -6,4 +6,6 @@ export default function createApp(ui, game, cellSize) {
             game.toggleCell(Math.floor(x / cellSize), Math.floor(y / cellSize));
         },
     });
+
+    ui.createElement({ id: 'stop' });
 }
