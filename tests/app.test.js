@@ -17,7 +17,10 @@ class MockUI {
             id: 'grid',
             cellSize: cellSize,
             click: (x, y) => {
-                this._game.toggleCell(x / cellSize, y / cellSize);
+                this._game.toggleCell(
+                    Math.floor(x / cellSize),
+                    Math.floor(y / cellSize),
+                );
             },
         });
     }
@@ -38,11 +41,12 @@ test('Renders a grid of cells', () => {
 test('Clicking on the grid toggles the corresponding cells', () => {
     const life = new Life();
     const ui = new MockUI(life);
-    const cellSize = 25; // size in pixels.
+    const cellSize = 20; // size in pixels.
 
     createApp(ui, cellSize);
     const grid = ui.findElement('grid');
-    grid.click(50, 50); // pixel co-ords, should toggle cell [2, 2].
+    grid.click(45, 65); // pixel co-ords.
 
-    expect(life.cells).toEqual([[2, 2]]);
+    // (45 / 20 = 2.25 -> floor to 2, 65 / 20 = 3.25 -> floor to 3).
+    expect(life.cells).toEqual([[2, 3]]);
 });
