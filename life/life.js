@@ -167,7 +167,7 @@ export class Life {
 
     /** Stops the game loop from executing ticks. */
     stop() {
-        if (this._gameLoop) {
+        if (this.isPlaying()) {
             this._gameLoop.cancel();
             this._gameLoop = null;
         }

@@ -80,6 +80,9 @@ test('schedules game ticks while playing', () => {
 
     const mockScheduler = (callback) => {
         tickCallback = callback;
+        return {
+            cancel: () => {},
+        };
     };
 
     life.toggleCell(0, 0); // Lone cell will die after 1 tick.
