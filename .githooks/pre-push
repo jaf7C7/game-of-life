@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Make sure all tests are passing before pushing.
+
+exec npm test
